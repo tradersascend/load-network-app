@@ -1,0 +1,15 @@
+# Ignore Node.js module folders
+
+node_modules/
+client/node_modules/
+scraper/node_modules/
+
+# Ignore environment variables files
+
+.env
+client/.env
+server/.env
+scraper/.env
+
+# Ignore temporary files
+npm-debug.log

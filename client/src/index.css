@@ -1,0 +1,11 @@
+/* A simple CSS reset for consistency across browsers */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background-color: #f4f6f8; /* A light grey background for the app */
+}

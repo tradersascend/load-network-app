@@ -1,0 +1,30 @@
+{
+  "name": "load-network-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "import-zips": "node scripts/importZipCodes.js"
+  },
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.1",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.2",
+    "nanoid": "^5.1.5",
+    "nodemailer": "^7.0.3",
+    "nodemon": "^3.1.10",
+    "puppeteer": "^24.10.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "stripe": "^18.2.1"
+  }
+}
