@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://load-network-api.onrender.com/api/$1"
+    }
+  ]
+}
