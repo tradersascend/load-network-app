@@ -133,8 +133,8 @@ export default function LoadBoard() {
             }
 
             // Handle loads response
-            if (loadsResponse && Array.isArray(loadsResponse)) {
-                setLoads(loadsResponse);
+            if (loadsResponse && Array.isArray(loadsResponse.data)) {
+                setLoads(loadsResponse.data);
                 console.log(`Success: Frontend received ${loadsResponse.length} loads from the API.`);
             }
 
@@ -155,8 +155,8 @@ export default function LoadBoard() {
 
             loadService.searchLoads(searchParams)
                 .then(response => {
-                    if (response && Array.isArray(response)) {
-                        setLoads(response);
+                    if (response && Array.isArray(response.data)) {
+                        setLoads(response.data);
                     }
                 })
                 .catch(err => {
@@ -248,7 +248,7 @@ const handleLocationSave = async (truckId) => {
             date: searchParams.date,
         };
         const loadsResponse = await loadService.searchLoads(apiParams);
-        setLoads(loadsResponse);
+        setLoads(loadsResponse.data);
     } catch (err) {
         setError(err.response?.data?.message || 'Failed to search for loads.');
     } finally {
@@ -270,7 +270,7 @@ const handleLocationSave = async (truckId) => {
     setSearchParams(defaultParams);
     try {
         const loadsResponse = await loadService.searchLoads(defaultParams);
-        setLoads(loadsResponse);
+        setLoads(loadsResponse.data);
     } catch (err) {
         setError(err.response?.data?.message || 'Failed to fetch loads.');
     } finally {
