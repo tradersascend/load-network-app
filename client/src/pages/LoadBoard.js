@@ -113,7 +113,52 @@ export default function LoadBoard() {
 
 // ... (rest of the component)
 
+
   useEffect(() => {
+    const initialFetch = async () => {
+        setLoading(true);
+        setError('');
+        console.log('--- Starting Initial Fetch ---');
+
+        try {
+            const [trucksResponse, loadsResponse] = await Promise.all([
+                truckService.getTrucks(),
+                loadService.searchLoads()
+            ]);
+
+            // Handle trucks (no changes here)
+            if (trucksResponse && Array.isArray(trucksResponse.data)) {
+                setMyTrucks(trucksResponse.data);
+                if (trucksResponse.data.length > 0) {
+                    setSelectedTruck(trucksResponse.data[0]);
+                }
+            }
+
+            // --- DEBUGGING FOR LOADS ---
+            console.log('Initial Loads - Full API Response:', loadsResponse);
+            console.log('Initial Loads - Response Data (loadsResponse.data):', loadsResponse.data);
+
+            if (loadsResponse && Array.isArray(loadsResponse.data)) {
+                console.log('Initial Loads: Data is an array. Setting state.');
+                setLoads(loadsResponse.data);
+            } else {
+                console.error('Initial Loads: API response.data is NOT an array. Setting to empty to prevent crash.');
+                setLoads([]); // Prevent crash
+            }
+            // --- END DEBUGGING ---
+
+        } catch (err) {
+            console.error("Initial data fetching error:", err);
+            setError("Failed to load initial data. Please check the console.");
+            setLoads([]); // Prevent crash on error
+        } finally {
+            console.log('--- Initial Fetch Finished ---');
+            setLoading(false);
+        }
+    };
+    initialFetch();
+}, []); // Keep the empty dependency array
+ /*  useEffect(() => {
     const initialFetch = async () => {
         setLoading(true);
         setError('');
@@ -146,7 +191,7 @@ export default function LoadBoard() {
         }
     };
     initialFetch();
-}, []); // The empty dependency array is correct
+}, []); // The empty dependency array is correct */
 
   useEffect(() => {
     const intervalId = setInterval(() => {
