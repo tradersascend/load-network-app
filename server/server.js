@@ -24,16 +24,16 @@ mongoose.connect(process.env.MONGO_URI)
   // CORS configuration - ADD THIS SECTION
 const corsOptions = {
   origin: [
-    'http://localhost:3000', // Development
-    'http://localhost:3001', // Alternative dev port
+    //'http://localhost:3000', // Development
+    //'http://localhost:3001', // Alternative dev port
     process.env.FRONTEND_URL, // Your production frontend URL
-    'https://your-frontend-domain.com', // Replace with your actual domain
-    'https://your-app.netlify.app', // If using Netlify
+    //'https://your-frontend-domain.com', // Replace with your actual domain
+    //'https://your-app.netlify.app', // If using Netlify
     'https://load-network-app.vercel.app/', // If using Vercel
   ].filter(Boolean), // Remove any undefined values
   credentials: true,
   optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  //methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
 
