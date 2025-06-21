@@ -138,9 +138,9 @@ export default function LoadBoard() {
             console.log('Initial Loads - Full API Response:', loadsResponse);
             console.log('Initial Loads - Response Data (loadsResponse.data):', loadsResponse.data);
 
-            if (loadsResponse && Array.isArray(loadsResponse.data)) {
+            if (loadsResponse && Array.isArray(loadsResponse)) {
                 console.log('Initial Loads: Data is an array. Setting state.');
-                setLoads(loadsResponse.data);
+                setLoads(loadsResponse);
             } else {
                 console.error('Initial Loads: API response.data is NOT an array. Setting to empty to prevent crash.');
                 setLoads([]); // Prevent crash
