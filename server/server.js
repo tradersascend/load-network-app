@@ -29,7 +29,7 @@ const corsOptions = {
     process.env.FRONTEND_URL, // Your production frontend URL
     //'https://your-frontend-domain.com', // Replace with your actual domain
     //'https://your-app.netlify.app', // If using Netlify
-    'https://load-network-app.vercel.app/', // If using Vercel
+    'https://load-network-app.vercel.app', // If using Vercel
   ].filter(Boolean), // Remove any undefined values
   credentials: true,
   optionsSuccessStatus: 200,
