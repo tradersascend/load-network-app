@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = '/api/users/';
+const API_URL = 'https://load-network-api.onrender.com/api/users/';
 
 // For an admin to create a new user
 const createUser = (userData) => {

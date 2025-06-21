@@ -21,7 +21,24 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Successfully connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-app.use(cors());
+  // CORS configuration - ADD THIS SECTION
+const corsOptions = {
+  origin: [
+    'http://localhost:3000', // Development
+    'http://localhost:3001', // Alternative dev port
+    process.env.FRONTEND_URL, // Your production frontend URL
+    'https://your-frontend-domain.com', // Replace with your actual domain
+    'https://your-app.netlify.app', // If using Netlify
+    'https://load-network-api.onrender.com', // If using Vercel
+  ].filter(Boolean), // Remove any undefined values
+  credentials: true,
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
+//app.use(cors());
 
 // Stripe requires the raw request body to verify signatures, not the parsed JSON.
 app.use('/api/webhooks/stripe', express.raw({ type: 'application/json' }), webhookRoutes);
@@ -40,4 +57,5 @@ app.use('/api/alerts', require('./routes/alertRoutes'));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log(`Frontend URL configured: ${process.env.FRONTEND_URL}`);
 });
