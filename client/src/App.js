@@ -16,6 +16,7 @@ import Faq from './pages/Faq';
 import Contact from './pages/Contact';
 import LoadNotifier from './pages/LoadNotifier';
 import ErrorBoundary from './components/ErrorBoundary';
+import APIDiagnostic from './components/APIDiagnostic';
 
 const App = () => {
   return (
