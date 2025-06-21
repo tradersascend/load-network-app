@@ -15,12 +15,9 @@ import ResetPassword from './pages/ResetPassword';
 import Faq from './pages/Faq';
 import Contact from './pages/Contact';
 import LoadNotifier from './pages/LoadNotifier';
-import ErrorBoundary from './components/ErrorBoundary';
-import APIDiagnostic from './components/APIDiagnostic';
 
 const App = () => {
   return (
-    <ErrorBoundary>
     <AuthProvider>
       <Router>
         <Routes>
@@ -32,7 +29,6 @@ const App = () => {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/forgot-account-id" element={<ForgotAccountId />} />
-          <Route path="/diagnostic" element={<APIDiagnostic />} />
           
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
@@ -48,7 +44,6 @@ const App = () => {
         </Routes>
       </Router>
     </AuthProvider>
-    </ErrorBoundary>
   );
 };
 
