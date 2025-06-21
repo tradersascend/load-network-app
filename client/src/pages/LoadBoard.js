@@ -138,9 +138,9 @@ export default function LoadBoard() {
             console.log('Initial Loads - Full API Response:', loadsResponse);
             console.log('Initial Loads - Response Data (loadsResponse.data):', loadsResponse.data);
 
-            if (loadsResponse && Array.isArray(loadsResponse.data)) {
+            if (loadsResponse && Array.isArray(loadsResponse)) {
                 console.log('Initial Loads: Data is an array. Setting state.');
-                setLoads(loadsResponse.data);
+                setLoads(loadsResponse);
             } else {
                 console.error('Initial Loads: API response.data is NOT an array. Setting to empty to prevent crash.');
                 setLoads([]); // Prevent crash
@@ -302,9 +302,9 @@ const handleLocationSave = async (truckId) => {
         console.log('Search - Type of Response Data:', typeof response.data);
         // --- END DEBUGGING ---
 
-        if (response && Array.isArray(response.data)) {
+        if (response && Array.isArray(response)) {
             console.log('Search: Data is an array. Setting state.');
-            setLoads(response.data);
+            setLoads(response);
         } else {
             console.error('Search: API response.data is NOT an array. Setting to empty to prevent crash.');
             setError('Received invalid data from the server.');
@@ -362,8 +362,8 @@ const handleLocationSave = async (truckId) => {
         console.log('Reset - Response Data (response.data):', response.data);
         // --- END DEBUGGING ---
 
-        if (response && Array.isArray(response.data)) {
-            setLoads(response.data);
+        if (response && Array.isArray(response)) {
+            setLoads(response);
         } else {
              console.error('Reset: API response.data is NOT an array. Setting to empty.');
             setLoads([]);
