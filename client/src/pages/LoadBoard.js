@@ -279,8 +279,49 @@ const handleLocationSave = async (truckId) => {
         setSearchParams({ ...searchParams, [name]: value });
     }
   };
-  
+
   const handleSearch = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    console.log('--- Starting Search ---');
+
+    try {
+        const apiParams = {
+            origin: searchParams.origin,
+            originRadius: searchParams.originRadius,
+            destination: searchParams.destination,
+            destinationRadius: searchParams.destinationRadius,
+            date: searchParams.date,
+        };
+        const response = await loadService.searchLoads(apiParams);
+
+        // --- DEBUGGING ---
+        console.log('Search - Full API Response:', response);
+        console.log('Search - Response Data (response.data):', response.data);
+        console.log('Search - Type of Response Data:', typeof response.data);
+        // --- END DEBUGGING ---
+
+        if (response && Array.isArray(response.data)) {
+            console.log('Search: Data is an array. Setting state.');
+            setLoads(response.data);
+        } else {
+            console.error('Search: API response.data is NOT an array. Setting to empty to prevent crash.');
+            setError('Received invalid data from the server.');
+            setLoads([]); // Prevent crash
+        }
+
+    } catch (err) {
+        console.error('An error occurred in the search catch block:', err);
+        setError(err.response?.data?.message || 'Failed to search for loads.');
+        setLoads([]); // Also clear loads on error
+    } finally {
+        console.log('--- Search Finished ---');
+        setLoading(false);
+    }
+};
+  
+ /*  const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
@@ -299,10 +340,44 @@ const handleLocationSave = async (truckId) => {
     } finally {
         setLoading(false);
     }
-  };
+  }; */
   
   // --- Handler for the reset button ---
+
   const handleResetSearch = async () => {
+    setLoading(true);
+    setError('');
+    console.log('--- Starting Reset Search ---');
+
+    const defaultParams = {
+        origin: '', originRadius: '', destination: '', destinationRadius: '', date: '',
+    };
+    setSearchParams(defaultParams);
+
+    try {
+        const response = await loadService.searchLoads(defaultParams);
+
+        // --- DEBUGGING ---
+        console.log('Reset - Full API Response:', response);
+        console.log('Reset - Response Data (response.data):', response.data);
+        // --- END DEBUGGING ---
+
+        if (response && Array.isArray(response.data)) {
+            setLoads(response.data);
+        } else {
+             console.error('Reset: API response.data is NOT an array. Setting to empty.');
+            setLoads([]);
+        }
+    } catch (err) {
+        console.error('An error occurred in the reset catch block:', err);
+        setError(err.response?.data?.message || 'Failed to fetch loads.');
+        setLoads([]);
+    } finally {
+        console.log('--- Reset Finished ---');
+        setLoading(false);
+    }
+  };
+  /* const handleResetSearch = async () => {
     setLoading(true);
     setError('');
     const defaultParams = {
@@ -321,7 +396,7 @@ const handleLocationSave = async (truckId) => {
     } finally {
         setLoading(false);
     }
-  };
+  }; */
   
   const handleOpenBidModal = (load) => {
     if (selectedTruck && selectedTruck.status !== 'Available') {
