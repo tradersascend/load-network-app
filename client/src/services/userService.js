@@ -1,13 +1,9 @@
 import axios from 'axios';
 
-// Use environment variable or fallback to production URL
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://load-network-api.onrender.com';
-const API_URL = `${API_BASE_URL}/api/users/`;
+const API_URL = 'https://load-network-api.onrender.com/api/users/';
 
-// Create axios instance with base configuration
-const api = axios.create({
-    baseURL: API_URL,
-});
+/* const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://load-network-api.onrender.com';
+const API_URL = `${API_BASE_URL}/api/users/`; */
 
 // For an admin to create a new user
 const createUser = (userData) => {
